@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invois Bayaran Locum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    .invoice-container {
+      max-width: 600px;
+      margin: auto;
+      border: 1px solid #000;
+      padding: 20px;
+    }
+    h2, h3 {
+      text-align: center;
+    }
+    .info p {
+      margin: 5px 0;
+    }
+    .signature {
+      margin-top: 40px;
+      text-align: right;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <div class="header">
+      <h2>[Nama Klinik / Hospital]</h2>
+      <p style="text-align: center;">[Alamat Klinik / Hospital]</p>
+      <p style="text-align: center;">[No. Telefon & Emel]</p>
+      <h3>INVOIS BAYARAN LOCUM</h3>
+    </div>
+    <div class="info">
+      <p>Nama Doktor: <span id="namaDoktor">[Nama Lengkap]</span></p>
+      <p>No. Pendaftaran MMC: <span id="noMMC">[No. MMC]</span></p>
+      <p>Tarikh Locum: <span id="tarikhLocum">[Tarikh Bertugas]</span></p>
+      <p>Masa Locum: <span id="masaLocum">[Waktu Bertugas]</span></p>
+      <p>Kadar Bayaran: RM <span id="kadarBayaran">[Jumlah per jam / sesi]</span></p>
+      <p>Jumlah Jam / Sesi: <span id="jumlahJam">[Jumlah Jam / Sesi]</span></p>
+      <p>Jumlah Bayaran: RM <span id="jumlahBayaran">[Jumlah Keseluruhan]</span></p>
+      <p>Bank & No. Akaun: <span id="bankNoAkaun">[Nama Bank & No. Akaun untuk pembayaran]</span></p>
+    </div>
+    <p>Saya mengesahkan bahawa saya telah menjalankan tugas locum seperti dinyatakan di atas dan mengesahkan jumlah bayaran ini adalah betul.</p>
+    <div class="signature">
+      <p>Tandatangan Doktor:</p>
+      <p>________________________</p>
+    </div>
+    <button id="printButton">Cetak Invois</button>
+  </div>
+
+  <script>
+    // Fungsi untuk mendapatkan parameter dari URL
+    function getQueryParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split("&");
+      for (let i = 0; i < pairs.length; i++) {
+        const pair = pairs[i].split("=");
+        if (pair[0]) {
+          params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+        }
+      }
+      return params;
+    }
+
+    // Isikan data invois berdasarkan parameter URL
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = getQueryParams();
+      if (params.namaDoktor) document.getElementById("namaDoktor").textContent = params.namaDoktor;
+      if (params.noMMC) document.getElementById("noMMC").textContent = params.noMMC;
+      if (params.tarikhLocum) document.getElementById("tarikhLocum").textContent = params.tarikhLocum;
+      if (params.masaLocum) document.getElementById("masaLocum").textContent = params.masaLocum;
+      if (params.kadarBayaran) document.getElementById("kadarBayaran").textContent = params.kadarBayaran;
+      if (params.jumlahJam) document.getElementById("jumlahJam").textContent = params.jumlahJam;
+      if (params.jumlahBayaran) document.getElementById("jumlahBayaran").textContent = params.jumlahBayaran;
+      if (params.bankNoAkaun) document.getElementById("bankNoAkaun").textContent = params.bankNoAkaun;
+    });
+
+    // Butang Print untuk memanggil fungsi print
+    document.getElementById("printButton").addEventListener("click", function() {
+      window.print();
+    });
+  </script>
+</body>
+</html>
